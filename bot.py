@@ -14,7 +14,6 @@ import datetime
 class MyStreamer(TwythonStreamer):
 
         def on_success(self, data):
-		""" compute sentiment and populate charts """
                 analysis.process(data)
 
         def on_error(self, status_code, data):
