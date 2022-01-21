@@ -13,15 +13,15 @@ import datetime
 #---------------------------------------------------------------
 class MyStreamer(TwythonStreamer):
 
-        def on_success(self, data):
-                analysis.process(data)
+	def on_success(self, data):
+		analysis.process(data)
 
-        def on_error(self, status_code, data):
-                print('Bot error: status code = %s' % status_code)
+	def on_error(self, status_code, data):
+		print('Bot error: status code = %s' % status_code)
 		bot_sleep()
 
-        def on_timeout(self):
-                print('Bot error: timeout')
+	def on_timeout(self):
+		print('Bot error: timeout')
 		bot_sleep()
 
 def bot_sleep():
@@ -30,16 +30,16 @@ def bot_sleep():
 	streamRun()
 
 def streamRun():
-        try:
+	try:
 		print("Bot: (re)initializing stream")
-                stream = MyStreamer(os.getenv('APP_KEY'), os.getenv('APP_SECRET'),
-                        os.getenv('OAUTH_TOKEN'), os.getenv('OAUTH_TOKEN_SECRET'), client_args={'verify':False} )
-                track = sorted(set([tag.lower().strip() for tag in os.getenv('INCLUDE_TWITTER_HASH').split(',') ] ) )
+		stream = MyStreamer(os.getenv('APP_KEY'), os.getenv('APP_SECRET'),
+			os.getenv('OAUTH_TOKEN'), os.getenv('OAUTH_TOKEN_SECRET'), client_args={'verify':False} )
+		track = sorted(set([tag.lower().strip() for tag in os.getenv('INCLUDE_TWITTER_HASH').split(',') ] ) )
 		for t in track:
 			print(t)
-                stream.statuses.filter(track=track)
+		stream.statuses.filter(track=track)
 
-        except Exception as e:
+	except Exception as e:
 		print('Bot error: streamRun exception: %s' % e)
 		bot_sleep()
 
