@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import requests, json, os, sys
-from textblob import TextBlob
+#from textblob import TextBlob
 from collections import Counter
 from twython import Twython, TwythonError
 import random
@@ -11,7 +11,8 @@ def computeSentiment(data):
 	""" Quick and Dirty Sentiment """
 
 	value = 'Neutral'
-	sentiment = TextBlob(data['text']).sentiment.polarity
+	#sentiment = TextBlob(data['text']).sentiment.polarity
+	sentiment = random.choice([-1, 1])
 	if sentiment < 0:
 		value = 'Bad'
 	elif sentiment > 0:
